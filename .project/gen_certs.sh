@@ -260,7 +260,7 @@ if [[ "$CLIENT" == "YES" && ("$FORCE" == "YES" || ! -f ${OUT_DIR}/${OUT_PREFIX}c
         --ca-cert ${OUT_DIR}/${OUT_PREFIX}l2_ca.pem \
         --ca-key ${OUT_DIR}/${OUT_PREFIX}l2_ca.key \
         --csr-profile ${CSR_DIR}/${CSR_PREFIX}client.yaml \
-        --san spiffe://secdi/client \
+        --san spiffe://promptviser/client \
         --key-label "${KEY_LABEL}${OUT_PREFIX}client*" \
         --output ${OUT_DIR}/${OUT_PREFIX}client
 
@@ -277,7 +277,7 @@ if [[ "$JOBS" == "YES" && ("$FORCE" == "YES" || ! -f ${OUT_DIR}/${OUT_PREFIX}job
         --ca-cert ${OUT_DIR}/${OUT_PREFIX}l2_ca.pem \
         --ca-key ${OUT_DIR}/${OUT_PREFIX}l2_ca.key \
         --csr-profile ${CSR_DIR}/${CSR_PREFIX}jobs.yaml \
-        --san spiffe://secdi/jobs \
+        --san spiffe://promptviser/jobs \
         --key-label "${KEY_LABEL}${OUT_PREFIX}jobs*" \
         --output ${OUT_DIR}/${OUT_PREFIX}jobs
 
@@ -295,7 +295,7 @@ if [[ "$PEERS" == "YES" && ("$FORCE" == "YES" || ! -f ${OUT_DIR}/${OUT_PREFIX}pe
         --ca-cert ${OUT_DIR}/${OUT_PREFIX}l2_ca.pem \
         --ca-key ${OUT_DIR}/${OUT_PREFIX}l2_ca.key \
         --csr-profile ${CSR_DIR}/${CSR_PREFIX}peer.yaml \
-        --san localhost,${SAN},${HOSTNAME},spiffe://secdi/peer \
+        --san localhost,${SAN},${HOSTNAME},spiffe://promptviser/peer \
         --key-label "${KEY_LABEL}${OUT_PREFIX}peer*" \
         --output ${OUT_DIR}/${OUT_PREFIX}peer
 

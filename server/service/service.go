@@ -6,13 +6,14 @@ import (
 
 	"github.com/effective-security/porto/gserver"
 	"github.com/effective-security/porto/xhttp/header"
+	"github.com/effective-security/promptviser/server/service/adviser"
 	"github.com/effective-security/promptviser/server/service/status"
 )
 
 // Factories provides map of gserver.ServiceFactory
 var Factories = map[string]gserver.ServiceFactory{
-	status.ServiceName: status.Factory,
-	// advisor.ServiceName:      advisor.Factory,
+	status.ServiceName:  status.Factory,
+	adviser.ServiceName: adviser.Factory,
 }
 
 // GetPublicServerURL returns complete server URL for given relative end-point

@@ -66,7 +66,7 @@ servers:
       client_cert_auth: false
     services:
       - status
-      #- adviser
+      - adviser
       #- swagger
     timeout:
       request: 3s

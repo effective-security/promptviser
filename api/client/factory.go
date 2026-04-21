@@ -49,6 +49,9 @@ type Config struct {
 type Factory interface {
 	// StatusClient returns Status client
 	StatusClient(svc string, ops ...Option) (pb.StatusServer, io.Closer, error)
+
+	// AdviserClient returns Adviser client
+	AdviserClient(svc string, ops ...Option) (pb.AdviserServer, io.Closer, error)
 }
 
 // Option configures how we set up the client
@@ -166,4 +169,13 @@ func (f *factory) StatusClient(svc string, ops ...Option) (pb.StatusServer, io.C
 		return nil, nil, err
 	}
 	return proxypb.NewStatusClient(c.Conn(), c.Opts()), c, nil
+}
+
+// AdviserClient returns Adviser client from connection
+func (f *factory) AdviserClient(svc string, ops ...Option) (pb.AdviserServer, io.Closer, error) {
+	c, err := f.NewClient(svc, ops...)
+	if err != nil {
+		return nil, nil, err
+	}
+	return proxypb.NewAdviserClient(c.Conn(), c.Opts()), c, nil
 }

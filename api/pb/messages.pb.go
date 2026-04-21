@@ -3,6 +3,7 @@
 package pb
 
 import (
+	context "context"
 	"fmt"
 	sync "sync"
 
@@ -155,6 +156,37 @@ var ServerVersion_MessageDescription = &api.MessageDescription{
 	},
 }
 
+var SubmitRequest_MessageDescription = &api.MessageDescription{
+	Name:     "SubmitRequest",
+	Display:  "Submit Request",
+	FullName: "pb.SubmitRequest",
+	Fields: []*api.FieldMeta{
+		{
+			Name:          "Data",
+			FullName:      "pb.SubmitRequest.Data",
+			Type:          "string",
+			SearchType:    "keyword",
+			SearchOptions: api.SearchOption_Sortable,
+		},
+	},
+}
+
+var SubmitResponse_MessageDescription = &api.MessageDescription{
+	Name:     "SubmitResponse",
+	Display:  "Submit Response",
+	FullName: "pb.SubmitResponse",
+	Fields: []*api.FieldMeta{
+		{
+			Name:          "ID",
+			FullName:      "pb.SubmitResponse.ID",
+			Type:          "string",
+			SearchType:    "keyword",
+			SearchOptions: api.SearchOption_Sortable,
+			Documentation: `ID is the job ID.`,
+		},
+	},
+}
+
 // MessageAllocator defines constructor to allocate Protobuf message
 type MessageAllocator func() any
 
@@ -166,6 +198,8 @@ var (
 		"pb.ServerStatusResponse":           ServerStatusResponse_MessageDescription,
 		"pb.ServerStatusResponse.PodsEntry": ServerStatusResponse_PodsEntry_MessageDescription,
 		"pb.ServerVersion":                  ServerVersion_MessageDescription,
+		"pb.SubmitRequest":                  SubmitRequest_MessageDescription,
+		"pb.SubmitResponse":                 SubmitResponse_MessageDescription,
 	}
 
 	messageAllocators = map[string]MessageAllocator{
@@ -174,14 +208,22 @@ var (
 		"pb.ServerStatusResponse":           func() any { return new(ServerStatusResponse) },
 		"pb.ServerStatusResponse.PodsEntry": func() any { return make(map[string]string) },
 		"pb.ServerVersion":                  func() any { return new(ServerVersion) },
+		"pb.SubmitRequest":                  func() any { return new(SubmitRequest) },
+		"pb.SubmitResponse":                 func() any { return new(SubmitResponse) },
 	}
 )
 
+func (m *SubmitRequest) Validate(ctx context.Context) error {
+	return api.ValidateRequest(ctx, m, SubmitRequest_MessageDescription)
+}
 func (m *ServerStatusResponse) GetMessageDescription() *api.MessageDescription {
 	return ServerStatusResponse_MessageDescription
 }
 func (m *ServerVersion) GetMessageDescription() *api.MessageDescription {
 	return ServerVersion_MessageDescription
+}
+func (m *SubmitResponse) GetMessageDescription() *api.MessageDescription {
+	return SubmitResponse_MessageDescription
 }
 
 func GetMessageDescriptions() map[string]*api.MessageDescription {

@@ -68,6 +68,11 @@ func GetMethodAliases() map[string]string {
 // methods defines map for routes
 var methods = map[string]*MethodInfo{
 
+	Adviser_Submit_FullMethodName: {
+		Allocator: func() any { return new(SubmitRequest) },
+		CliCmd:    "submit",
+	},
+
 	Status_Version_FullMethodName: {
 		Allocator: func() any { return new(emptypb.Empty) },
 		CliCmd:    "version",

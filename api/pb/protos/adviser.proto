@@ -1,0 +1,25 @@
+syntax = "proto3";
+package pb;
+
+option go_package = "github.com/effective-security/promptviser/api/pb";
+import "google/api/annotations.proto";
+import "es/api/annotations.proto";
+// import "google/protobuf/empty.proto";
+
+service Adviser {
+  // Submit data for analysis.
+  rpc Submit(SubmitRequest) returns (SubmitResponse) {
+    option (google.api.http) = {
+      post : "/pb.Adviser/Submit",
+      body : "*"
+    };
+    option (es.api.cli_cmd) = "submit";
+  };
+}
+
+message SubmitRequest { string Data = 1 [ json_name = "Data" ]; }
+
+message SubmitResponse {
+  // ID is the job ID.
+  string ID = 1 [ json_name = "ID" ];
+}

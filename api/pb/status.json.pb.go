@@ -3,32 +3,6 @@
 
 package pb
 
-import (
-	"encoding/json"
-
-	"google.golang.org/protobuf/encoding/protojson"
-)
-
-var JsonMarshalOptions = protojson.MarshalOptions{
-	UseEnumNumbers:  true,
-	EmitUnpopulated: false,
-	UseProtoNames:   true,
-	AllowPartial:    true,
-}
-
-var JsonUnmarshalOptions = protojson.UnmarshalOptions{
-	AllowPartial:   true,
-	DiscardUnknown: true,
-}
-
-// MarshalJSON implements json.Marshaler
-func MarshalJSON(v any) ([]byte, error) {
-	if JsonMarshalOptions.Multiline {
-		return json.MarshalIndent(v, "", JsonMarshalOptions.Indent)
-	}
-	return json.Marshal(v)
-}
-
 // MarshalJSON implements json.Marshaler
 func (msg *ServerVersion) MarshalJSON() ([]byte, error) {
 	return JsonMarshalOptions.Marshal(msg)
