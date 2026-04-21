@@ -28,9 +28,9 @@ func TestFactory(t *testing.T) {
 	require.NoError(t, err)
 	defer closer.Close()
 
-	// _, closer, err = f.AdviserClient("local")
-	// require.NoError(t, err)
-	// defer closer.Close()
+	_, closer, err = f.AdviserClient("local")
+	require.NoError(t, err)
+	defer closer.Close()
 
 	assert.Nil(t, f.(*factory).dops.callerIdentity)
 }

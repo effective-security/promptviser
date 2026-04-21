@@ -55,7 +55,7 @@ build_promptviser:
 
 build_promptviserctl:
 	echo "*** Building promptviserctl"
-	# go build ${BUILD_FLAGS} -o ${PROJ_ROOT}/bin/promptviserctl ./cmd/promptviserctl
+	go build ${BUILD_FLAGS} -o ${PROJ_ROOT}/bin/promptviserctl ./cmd/promptviserctl
 
 build: build_promptviser build_promptviserctl
 
@@ -157,6 +157,7 @@ proto:
 		--dirs /dirs/protos \
 		--golang ./.. \
 		--enum pb ./.. \
+		--http pb ./.. \
 		--json ./.. \
 		--mock ./.. \
 		--proxy ./.. \
