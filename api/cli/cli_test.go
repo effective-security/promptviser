@@ -69,7 +69,7 @@ func TestParse(t *testing.T) {
 		require.Equal(t, "cmd", ctx.Command())
 
 		_, err = cl.Cli.RPCClient(true)
-		assert.EqualError(t, err, "unable to create client: context deadline exceeded")
+		assert.EqualError(t, err, "unable to create client: failed to connect to \"localhost:7880\" within 6s")
 
 		_, err = cl.Cli.HTTPClient(true)
 		assert.NoError(t, err)
@@ -95,7 +95,7 @@ func TestParse(t *testing.T) {
 		assert.False(t, cl.IsJSON())
 
 		_, err = cl.Cli.RPCClient(true)
-		assert.EqualError(t, err, "unable to create client: context deadline exceeded")
+		assert.EqualError(t, err, "unable to create client: failed to connect to \"localhost:7880\" within 1s")
 
 		_, err = cl.Cli.HTTPClient(true)
 		assert.NoError(t, err)

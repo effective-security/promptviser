@@ -71,7 +71,7 @@ func TestCheckErrIDConflict(t *testing.T) {
 
 	writer.Flush()
 	log := tw.String()
-	assert.Contains(t, log, `func=CheckErrIDConflict reason="duplicate_key"`)
+	assert.Contains(t, log, `func=CheckErrIDConflict reason=duplicate_key`)
 	assert.Contains(t, log, `caller="TestCheckErrIDConflict [provider_test.go:`)
 }
 
@@ -112,7 +112,7 @@ func Test_DbMeasureSince(t *testing.T) {
 	var b bytes.Buffer
 	writer := bufio.NewWriter(&b)
 	xlog.SetPackageLogLevel("github.com/effective-security/promptviser/internal/adviserdb", "pgsql", xlog.DEBUG)
-	xlog.SetFormatter(xlog.NewStringFormatter(writer).Options(xlog.FormatSkipTime))
+	xlog.SetFormatter(xlog.NewStringFormatter(writer).Options(xlog.FormatSkipTime(true)))
 
 	slowMethod()
 
@@ -120,5 +120,5 @@ func Test_DbMeasureSince(t *testing.T) {
 	pgsql.DbMeasureQuerySince("ListYYY", time.Now())
 
 	writer.Flush()
-	assert.Contains(t, b.String(), "level=D pkg=pgsql func=DbMeasureQuerySince reason=\"slow\" db=\"adviserdb\" query=\"slowMethod\" ms=")
+	assert.Contains(t, b.String(), "level=D pkg=pgsql func=DbMeasureQuerySince reason=slow db=adviserdb query=slowMethod ms=")
 }
