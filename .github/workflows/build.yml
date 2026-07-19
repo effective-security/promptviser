@@ -80,7 +80,7 @@ jobs:
         run: git config --global url."https://dissoupov:${TOKEN}@github.com".insteadOf "https://github.com"
 
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         # with:
         #   fetch-depth: 0
         #   submodules: true
@@ -90,7 +90,7 @@ jobs:
           git fetch --prune --unshallow
 
       - name: Setup Go
-        uses: actions/setup-go@v6
+        uses: actions/setup-go@v7
         with:
           go-version-file: go.mod
 
